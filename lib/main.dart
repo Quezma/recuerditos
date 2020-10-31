@@ -15,9 +15,18 @@ class Myapp extends StatelessWidget {
       title: 'Matrial App',
       theme: ThemeData(
         primaryColor: Color(0x4190CB),
-        buttonColor: Color(0xDBB514),
+        accentColor: Color(0xDBB514),
         textTheme: TextTheme(
+          headline1: TextStyle(
+            fontSize: 26,
+            color: Color(0x5D5D5D),
+          ),
+          headline2: TextStyle(
+            fontSize: 20,
+            color: Color(0x5D5D5D),
+          ),
           bodyText1: TextStyle(
+            fontSize: 16,
             color: Color(0x5D5D5D),
           ),
         ),
