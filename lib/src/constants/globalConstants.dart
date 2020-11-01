@@ -17,3 +17,6 @@ TextStyle subtitle(BuildContext context) =>
 
 TextStyle bodyText(BuildContext context) =>
     Theme.of(context).textTheme.bodyText1;
+
+TextStyle buttonText(BuildContext context) =>
+    Theme.of(context).textTheme.button;

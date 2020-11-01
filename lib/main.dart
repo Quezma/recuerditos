@@ -16,7 +16,13 @@ class Myapp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xff4190CB),
         accentColor: Color(0xffDBB514),
+        buttonColor: Color(0xffDBB514),
         textTheme: TextTheme(
+          button: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+            fontWeight: FontWeight.w400,
+          ),
           headline1: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.w600,
@@ -29,6 +35,7 @@ class Myapp extends StatelessWidget {
           bodyText1: TextStyle(
             fontSize: 16,
             color: Color(0xff5D5D5D),
+            fontWeight: FontWeight.w400,
           ),
         ),
         scaffoldBackgroundColor: Color(0xFFf8f8f8),
