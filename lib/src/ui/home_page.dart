@@ -85,6 +85,8 @@ class HomePage extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: 40.0,
       crossAxisSpacing: 40.0,
+      padding: EdgeInsets.all(10.0),
+      primary: false,
       children: [
         Container(
           decoration: BoxDecoration(
