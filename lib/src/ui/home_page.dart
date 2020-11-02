@@ -4,6 +4,8 @@ import 'package:recuerditos/src/constants/globalConstants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatelessWidget {
+  final List cards = [1, 2, 3, 4];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,100 +71,28 @@ class HomePage extends StatelessWidget {
   }
 
   Widget descriptionHome(BuildContext context) {
-    return Row(children: [
-      Flexible(
-        child: Text(
-          'Presiona el recuadro del juego que mas te guste',
-          style: bodyText(context),
-          textAlign: TextAlign.start,
-        ),
-      ),
-    ]);
-  }
-
-  Widget gameList(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 40.0,
-      crossAxisSpacing: 40.0,
-      padding: EdgeInsets.all(10.0),
-      primary: false,
+    return Row(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                primaryColor(context),
-                darkPrimary(context),
-              ],
-            ),
-            image: DecorationImage(
-              image: AssetImage('assets/cardsIcon.png'),
-              scale: 7.0,
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                primaryColor(context),
-                darkPrimary(context),
-              ],
-            ),
-            image: DecorationImage(
-              image: AssetImage('assets/cardsIcon.png'),
-              scale: 7.0,
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                primaryColor(context),
-                darkPrimary(context),
-              ],
-            ),
-            image: DecorationImage(
-              image: AssetImage('assets/cardsIcon.png'),
-              scale: 7.0,
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                primaryColor(context),
-                darkPrimary(context),
-              ],
-            ),
-            image: DecorationImage(
-              image: AssetImage('assets/cardsIcon.png'),
-              scale: 7.0,
-            ),
+        Flexible(
+          child: Text(
+            'Presiona el recuadro del juego que mas te guste',
+            style: subtitle(context),
+            textAlign: TextAlign.start,
           ),
         ),
       ],
     );
   }
 
+  Widget gameList(BuildContext context) {
+    return Wrap(
+      children: cardList(context),
+    );
+  }
+
   Widget buttonHome(BuildContext context) => SizedBox(
         width: screenSize(context).width * 0.45,
-        height: 50.0,
+        height: screenSize(context).height * 0.1,
         child: RaisedButton(
           onPressed: () {},
           shape: StadiumBorder(),
@@ -172,4 +102,29 @@ class HomePage extends StatelessWidget {
           ),
         ),
       );
+
+  List<Widget> cardList(BuildContext context) {
+    return cards
+        .map((card) => Container(
+              margin: EdgeInsets.all(10.0),
+              width: 130.0,
+              height: 130.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    primaryColor(context),
+                    darkPrimary(context),
+                  ],
+                ),
+                image: DecorationImage(
+                  image: AssetImage('assets/cardsIcon.png'),
+                  scale: 7.0,
+                ),
+              ),
+            ))
+        .toList();
+  }
 }

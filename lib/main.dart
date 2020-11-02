@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:recuerditos/src/ui/help_page.dart';
 import 'package:recuerditos/src/ui/home_page.dart';
 import 'package:recuerditos/src/ui/score_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(Myapp());
 }
 
@@ -24,16 +28,16 @@ class Myapp extends StatelessWidget {
             fontWeight: FontWeight.w400,
           ),
           headline1: TextStyle(
-            fontSize: 26,
+            fontSize: 28,
             fontWeight: FontWeight.w600,
             color: Color(0xff5D5D5D),
           ),
           headline2: TextStyle(
-            fontSize: 20,
+            fontSize: 22,
             color: Color(0xff5D5D5D),
           ),
           bodyText1: TextStyle(
-            fontSize: 16,
+            fontSize: 18,
             color: Color(0xff5D5D5D),
             fontWeight: FontWeight.w400,
           ),
