@@ -10,13 +10,14 @@ Color darkPrimary(BuildContext context) => Color(0xFF0C475D);
 
 Color gray(BuildContext context) => Color(0x5D5D5D);
 
-TextStyle title(BuildContext context) => Theme.of(context).textTheme.headline1;
+TextStyle titleStyle(BuildContext context) =>
+    Theme.of(context).textTheme.headline1;
 
-TextStyle subtitle(BuildContext context) =>
+TextStyle subtitleStyle(BuildContext context) =>
     Theme.of(context).textTheme.headline2;
 
-TextStyle bodyText(BuildContext context) =>
+TextStyle bodyTextStyle(BuildContext context) =>
     Theme.of(context).textTheme.bodyText1;
 
-TextStyle buttonText(BuildContext context) =>
+TextStyle buttonTextStyle(BuildContext context) =>
     Theme.of(context).textTheme.button;

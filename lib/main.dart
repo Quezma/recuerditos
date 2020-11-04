@@ -28,16 +28,16 @@ class Myapp extends StatelessWidget {
             fontWeight: FontWeight.w400,
           ),
           headline1: TextStyle(
-            fontSize: 28,
+            fontSize: 26,
             fontWeight: FontWeight.w600,
             color: Color(0xff5D5D5D),
           ),
           headline2: TextStyle(
-            fontSize: 22,
+            fontSize: 20,
             color: Color(0xff5D5D5D),
           ),
           bodyText1: TextStyle(
-            fontSize: 18,
+            fontSize: 16,
             color: Color(0xff5D5D5D),
             fontWeight: FontWeight.w400,
           ),
