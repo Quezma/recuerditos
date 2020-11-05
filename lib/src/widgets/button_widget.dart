@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recuerditos/src/constants/globalConstants.dart';
+import 'package:recuerditos/src/constants/interface_constants.dart';
 
 Widget button(BuildContext context, String text) => Center(
       child: SizedBox(

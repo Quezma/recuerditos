@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:recuerditos/src/constants/globalConstants.dart';
+import 'package:recuerditos/src/constants/interface_constants.dart';
 import 'package:recuerditos/src/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -43,7 +43,6 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              //child: Placeholder(),
               child: button(context, 'Jugar Aleatorio'),
             )
           ],
@@ -65,7 +64,6 @@ class HomePage extends StatelessWidget {
         .map((card) => Column(
               children: [
                 Container(
-                  //margin: EdgeInsets.all(10.0),
                   width: 145.0,
                   height: 134.0,
                   decoration: BoxDecoration(
