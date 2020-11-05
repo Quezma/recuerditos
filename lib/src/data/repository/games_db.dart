@@ -10,7 +10,7 @@ class GameStore {
   Future<Database> get _db async => await DB.instace.database;
 
   final StoreRef<int, Map<String, dynamic>> _store =
-      intMapStoreFactory.store('gameStore');
+      intMapStoreFactory.store('gamesStore');
 
   Future addTask(Game game) async {
     await _store.add(await _db, game.toMap());
@@ -32,7 +32,6 @@ class GameStore {
     final snapshot = await _store.find(await _db, finder: finder);
     final getGame = snapshot.map((x) {
       final game = Game.fromMap(x.value);
-      //Aqui asigno la Id de mi modelo con autoincrement
       game.id = x.key;
       return game;
     }).toList();
