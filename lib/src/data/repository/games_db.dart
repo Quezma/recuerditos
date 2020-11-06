@@ -32,7 +32,6 @@ class GameStore {
     final snapshot = await _store.find(await _db, finder: finder);
     final getGame = snapshot.map((x) {
       final game = Game.fromMap(x.value);
-      //Aqui asigno la Id de mi modelo con autoincrement
       game.id = x.key;
       return game;
     }).toList();
