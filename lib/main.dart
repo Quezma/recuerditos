@@ -44,9 +44,9 @@ class Myapp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Color(0xFFf8f8f8),
       ),
-      initialRoute: '/',
+      initialRoute: 'home',
       routes: {
-        '/': (BuildContext context) => HomePage(),
+        'home': (BuildContext context) => HomePage(),
         'help': (BuildContext context) => HelpPage(),
         'score': (BuildContext context) => ScorePage(),
       },
