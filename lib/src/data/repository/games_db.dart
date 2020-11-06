@@ -10,7 +10,7 @@ class GameStore {
   Future<Database> get _db async => await DB.instace.database;
 
   final StoreRef<int, Map<String, dynamic>> _store =
-      intMapStoreFactory.store('gamesStore');
+      intMapStoreFactory.store('gameStore');
 
   Future addTask(Game game) async {
     await _store.add(await _db, game.toMap());
