@@ -33,7 +33,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _mapOnCkickGame(OnClickGame event) async* {
-    print(event);
     Navigator.pushNamed(event.context, 'help', arguments: event.id);
   }
 
