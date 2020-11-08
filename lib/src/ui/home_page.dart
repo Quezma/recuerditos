@@ -1,23 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recuerditos/src/bloc/home/bloc.dart';
 import 'package:recuerditos/src/constants/interface_constants.dart';
+import 'package:recuerditos/src/data/model/game_model.dart';
 import 'package:recuerditos/src/widgets/widgets.dart';
 
-class HomePage extends StatelessWidget {
-  final List cards = [1, 2, 3, 4];
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final _homeBloc = HomeBloc();
+
+  @override
+  void dispose() {
+    _homeBloc?.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            background(),
-            body(context),
-          ],
+    return BlocProvider.value(
+      value: _homeBloc,
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              background(),
+              body(context),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void helpRoute() {
+    _homeBloc.add(RandomGame(context: context));
   }
 
   Widget body(BuildContext context) => Container(
@@ -43,49 +63,60 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: button(context, 'Jugar Aleatorio'),
-            )
+              child: button(context, 'Jugar Aleatorio', () => helpRoute()),
+            ),
           ],
         ),
       );
 
   Widget gameList(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 45.0,
-      crossAxisSpacing: 58.0,
-      childAspectRatio: 0.8,
-      children: cardList(context),
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return GridView.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 45.0,
+          crossAxisSpacing: 58.0,
+          childAspectRatio: 0.8,
+          children: cardList(context, state),
+        );
+      },
     );
   }
 
-  List<Widget> cardList(BuildContext context) {
-    return cards
-        .map((card) => Column(
+  List<Widget> cardList(BuildContext context, HomeState state) {
+    final List<Game> games = state.games;
+    return games
+        .map((game) => Column(
               children: [
-                Container(
-                  width: 145.0,
-                  height: 134.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(13.0),
-                    gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        primaryColor(context),
-                        darkPrimary(context),
-                      ],
-                    ),
-                    image: DecorationImage(
-                      image: AssetImage('assets/cardsIcon.png'),
-                      scale: 7.0,
+                GestureDetector(
+                  onTap: () {
+                    _homeBloc.add(OnClickGame(context: context, id: game.id));
+                  },
+                  child: Container(
+                    width: 145.0,
+                    height: 134.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13.0),
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          primaryColor(context),
+                          darkPrimary(context),
+                        ],
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage('assets/${game.icon}.png'),
+                        scale: 7.0,
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 9.0,
                 ),
-                Text('Nombre ', style: bodyTextStyle(context)),
+                Text('${game.name}',
+                    style: bodyTextStyle(context), textAlign: TextAlign.center),
               ],
             ))
         .toList();

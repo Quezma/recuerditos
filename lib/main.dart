@@ -4,9 +4,11 @@ import 'package:recuerditos/src/ui/help_page.dart';
 import 'package:recuerditos/src/ui/home_page.dart';
 import 'package:recuerditos/src/ui/score_page.dart';
 
+import 'src/data/db/db.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await DB.instace.database;
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(Myapp());
 }
@@ -44,9 +46,9 @@ class Myapp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Color(0xFFf8f8f8),
       ),
-      initialRoute: '/',
+      initialRoute: 'home',
       routes: {
-        '/': (BuildContext context) => HomePage(),
+        'home': (BuildContext context) => HomePage(),
         'help': (BuildContext context) => HelpPage(),
         'score': (BuildContext context) => ScorePage(),
       },

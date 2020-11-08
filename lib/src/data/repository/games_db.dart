@@ -1,4 +1,5 @@
 import 'package:recuerditos/src/data/db/db.dart';
+import 'package:recuerditos/src/data/instances/games_instance.dart';
 import 'package:recuerditos/src/data/model/game_model.dart';
 import 'package:sembast/sembast.dart';
 
@@ -12,22 +13,23 @@ class GameStore {
   final StoreRef<int, Map<String, dynamic>> _store =
       intMapStoreFactory.store('gameStore');
 
-  Future addTask(Game game) async {
-    await _store.add(await _db, game.toMap());
-    print('table rows inserted');
+  Future addGame() async {
+    await _store.add(await _db, cardsGame().toMap());
+    await _store.add(await _db, questionsGame().toMap());
+    print('games inserted');
   }
 
-  Future updateTask(Game game) async {
+  Future updateGame(Game game) async {
     final finder = Finder(filter: Filter.byKey(game.id));
     await _store.update(await _db, game.toMap(), finder: finder);
   }
 
-  Future deleteTask(Game game) async {
+  Future deleteGame(Game game) async {
     final finder = Finder(filter: Filter.byKey(game.id));
     await _store.delete(await _db, finder: finder);
   }
 
-  Future<List<Game>> getAll() async {
+  Future<List<Game>> getAllGames() async {
     final finder = Finder(sortOrders: [SortOrder('id', false)]);
     final snapshot = await _store.find(await _db, finder: finder);
     final getGame = snapshot.map((x) {
