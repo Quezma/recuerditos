@@ -4,9 +4,11 @@ import 'package:recuerditos/src/ui/help_page.dart';
 import 'package:recuerditos/src/ui/home_page.dart';
 import 'package:recuerditos/src/ui/score_page.dart';
 
+import 'src/data/db/db.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await DB.instace.database;
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(Myapp());
 }

@@ -1,4 +1,5 @@
 import 'package:recuerditos/src/data/db/db.dart';
+import 'package:recuerditos/src/data/instances/games_instance.dart';
 import 'package:recuerditos/src/data/model/game_model.dart';
 import 'package:sembast/sembast.dart';
 
@@ -12,9 +13,10 @@ class GameStore {
   final StoreRef<int, Map<String, dynamic>> _store =
       intMapStoreFactory.store('gameStore');
 
-  Future addGame(Game game) async {
-    await _store.add(await _db, game.toMap());
-    print('table rows inserted');
+  Future addGame() async {
+    await _store.add(await _db, cardsGame().toMap());
+    await _store.add(await _db, questionsGame().toMap());
+    print('games inserted');
   }
 
   Future updateGame(Game game) async {

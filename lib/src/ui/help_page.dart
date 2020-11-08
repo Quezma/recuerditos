@@ -8,9 +8,10 @@ class HelpPage extends StatefulWidget {
 class _HelpPageState extends State<HelpPage> {
   @override
   build(BuildContext context) {
+    final _params = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: Center(
-        child: Text('Help Page'),
+        child: Text('ID del juego: $_params'),
       ),
     );
   }

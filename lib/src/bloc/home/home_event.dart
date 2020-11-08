@@ -5,8 +5,15 @@ abstract class HomeEvent {}
 
 class OnLoad extends HomeEvent {}
 
-class ChangeRoute extends HomeEvent {
+class OnClickGame extends HomeEvent {
+  BuildContext context;
+  int id;
+
+  OnClickGame({@required this.context, @required this.id});
+}
+
+class RandomGame extends HomeEvent {
   BuildContext context;
 
-  ChangeRoute({@required this.context});
+  RandomGame({@required this.context});
 }
