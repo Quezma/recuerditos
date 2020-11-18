@@ -40,33 +40,68 @@ class _HomePageState extends State<HomePage> {
     _homeBloc.add(RandomGame(context: context));
   }
 
-  Widget body(BuildContext context) => Container(
-        padding: EdgeInsets.symmetric(vertical: 26, horizontal: 17),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 0,
-              child: title(context, 'Recuerditos'),
-            ),
-            Expanded(
-              flex: 1,
-              child: subtitle(context, 'Divierte Aprendiendo'),
-            ),
-            Expanded(
-              flex: 1,
-              child: description(
-                  context, 'Presiona el recuadro del juego que mas te guste'),
-            ),
-            Expanded(
-              flex: 7,
-              child: gameList(context),
-            ),
-            Expanded(
-              flex: 2,
-              child: button(context, 'Jugar Aleatorio', helpRoute),
-            ),
-          ],
-        ),
+  Widget body(BuildContext context) => Stack(
+        children: [
+          BlocBuilder<HomeBloc, HomeState>(
+            builder: (_, state) {
+              if (state.isLoading) {
+                return Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      title(context, 'Recuerditos'),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Image(
+                        image: AssetImage('assets/logo.png'),
+                      ),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 40.0),
+                        child: LinearProgressIndicator(),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return Container(
+                  padding: EdgeInsets.symmetric(vertical: 26, horizontal: 17),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 0,
+                        child: title(context, 'Recuerditos'),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: subtitle(context, 'Divierte Aprendiendo'),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: description(context,
+                            'Presiona el recuadro del juego que mas te guste'),
+                      ),
+                      Expanded(
+                        flex: 7,
+                        child: gameList(context),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: button(context, 'Jugar Aleatorio', helpRoute),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
+        ],
       );
 
   Widget gameList(BuildContext context) {
@@ -91,6 +126,8 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     _homeBloc.add(OnClickGame(context: context, id: game.id));
+                    print(game.id);
+                    print(games);
                   },
                   child: Container(
                     width: 145.0,
