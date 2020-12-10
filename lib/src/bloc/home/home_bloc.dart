@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:recuerditos/src/bloc/home/bloc.dart';
-import 'package:recuerditos/src/data/model/game_model.dart';
-import 'package:recuerditos/src/data/repository/games_db.dart';
 import 'package:flutter/material.dart';
+import 'package:recuerditos/src/bloc/home/bloc.dart';
+import 'package:recuerditos/src/data/fixtures/games_fixture.dart';
+import 'package:recuerditos/src/data/model/game_model.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  List<Game> games = gamesList();
+
   HomeBloc() : super(HomeState.initialState()) {
     add(OnLoad());
   }
@@ -20,16 +22,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _mapOnLoad() async* {
-    List<Game> _games = await GameStore.database.getAllGames();
-
-    if (_games.length == 0) {
-      yield this.state.copyWith(isLoading: true);
-      await GameStore.database.addGame();
-      yield this.state.copyWith(isLoading: false);
-    }
-
-    List<Game> games = await GameStore.database.getAllGames();
-    yield this.state.copyWith(isLoading: true, games: games);
+    yield this.state.copyWith(isLoading: true);
+    await Future.delayed(Duration(seconds: 4));
+    yield this.state.copyWith(isLoading: false, games: games);
   }
 
   Stream<HomeState> _mapOnCkickGame(OnClickGame event) async* {
@@ -37,7 +32,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _mapRandomGame(RandomGame event) async* {
-    final games = await GameStore.database.getAllGames();
     games.shuffle();
     Navigator.pushNamed(event.context, 'help', arguments: games.first.id);
   }
